@@ -1,0 +1,27 @@
+.main {
+  border: 2px black dotted;
+  width: 14rem;
+  margin-top: 3rem;
+  height: 20rem;
+  border-radius: 10px;
+  display: inline-block;
+  margin: 3rem 0rem 1rem 4rem;
+}
+h3.pokemoName {
+  text-align: center;
+  position: relative;
+  top: 2rem;
+}
+h4.pokemoId {
+  text-align: center;
+  position: relative;
+  top: 1rem;
+}
+img.pokemonImg {
+  width: 12rem;
+  top: 2rem;
+  left: 1rem;
+  position: relative;
+  height: 12rem;
+  cursor: pointer;
+}

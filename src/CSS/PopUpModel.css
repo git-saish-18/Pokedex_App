@@ -1,0 +1,285 @@
+div.model {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background-color: rgb(150, 112, 233);
+  z-index: 1;
+  opacity: 0.5;
+}
+div.container {
+  z-index: 1;
+  position: absolute;
+  background-color: #dfe2d9;
+  width: 100rem;
+  height: 67rem;
+  top: 1rem;
+  left: 28rem;
+  max-width: 36rem;
+  padding: 2rem 2rem 2rem 2rem;
+  border-radius: 2px solid black;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  row-gap: 2rem;
+  column-gap: 0rem;
+}
+div.PokImg {
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
+div.PokInfo {
+  grid-column-start: 1;
+  grid-column-start: 3;
+  grid-row-start: 2;
+  width: 24rem;
+  position: absolute;
+  bottom: 54rem;
+  right: 0rem;
+}
+img.PokImg1 {
+  width: 11rem;
+  height: 11rem;
+  padding: 2rem 0rem 2rem 0.5rem;
+}
+div.Line1 {
+  font-size: xx-large;
+  position: relative;
+  left: 3rem;
+  bottom: 0.2rem;
+}
+div.Line2 {
+  font-size: xx-large;
+  position: relative;
+  left: 1rem;
+  bottom: 0.2rem;
+}
+.PokName {
+  position: relative;
+  font-size: xx-large;
+  font-weight: bolder;
+  left: 2rem;
+}
+div.PokImgContainer {
+  border: 2px dotted black;
+  border-radius: 1rem;
+  width: 12rem;
+  height: 15rem;
+}
+div .PokID {
+  font-size: 1.5rem;
+  top: 0.2rem;
+  position: relative;
+  left: 2rem;
+  font-weight: bolder;
+}
+
+button.closeBtn {
+  height: 2rem;
+  border: 2px solid;
+  border-radius: 35rem;
+  width: 2rem;
+  text-align: center;
+  position: relative;
+  top: 0.2rem;
+  cursor: pointer;
+}
+div.Gender {
+  grid-column-start: 3;
+  grid-column-end: 5;
+}
+div.EggsGroups {
+  grid-column-start: 5;
+  grid-column-end: 7;
+}
+li {
+  list-style: none;
+  text-decoration: none;
+}
+label {
+  font-size: large;
+  font-weight: bold;
+}
+div.hight {
+  margin: 2rem 1rem 1rem 1rem;
+}
+div.Wight {
+  margin: 2rem 1rem 1rem 1rem;
+}
+div.Gender {
+  margin: 2rem 0rem 1rem 0rem;
+}
+div.EggsGroups {
+  position: relative;
+  top: 2rem;
+  left: 1rem;
+}
+
+
+span.special {
+  font-family: emoji;
+  font-style: normal;
+  margin-top: 4rem;
+  border: 1px solid black;
+  border-radius: 6px;
+  position: relative;
+  top: 0.4rem;
+  font: icon;
+  text-transform: capitalize;
+  padding: 2px;
+}
+li.downSkill {
+  position: relative;
+  top: 2rem;
+  width: 10rem;
+}
+.Weight {
+  position: relative;
+  top: 2rem;
+}
+div.statscol1 {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  background-color: #98b4aa;
+  border: #98b4aa 2px solid;
+  border-radius: 14px;
+  position: relative;
+  left: 10px;
+  height: 14rem;
+  font-variant-caps: all-petite-caps;
+  padding-left: 1rem;
+  top: 1rem;
+}
+div.statscol2 {
+  grid-column-start: 3;
+  grid-column-end: 7;
+  background-color: #98b4aa;
+  border-radius: 14px;
+  position: relative;
+  right: 10px;
+  top: 1rem;
+}
+
+progress {
+  height: 32px;
+  position: relative;
+  width: 8rem;
+  text-align: center;
+}
+
+progress::-webkit-progress-bar {
+  background-color: #f2f2f2;
+}
+
+progress::-webkit-progress-value {
+  background-color: #dd0f0f;
+}
+
+progress::before {
+  content: attr(value);
+  position: absolute;
+  top: 2px;
+  left: 10%;
+  transform: translateX(-50%);
+  color: #ffffff;
+  font-weight: bold;
+}
+li.StatsName {
+  font-size: 14px;
+  font-variant-caps: all-petite-caps;
+  position: relative;
+  left: 1rem;
+  font-weight: 600;
+
+  font-variant-caps: all-petite-caps;
+}
+
+h1.Statshead {
+  position: relative;
+  left: 10px;
+  font-variant-caps: all-petite-caps;
+}
+
+progress.pogressbar1 {
+  top: 0.5rem;
+  position: relative;
+  left: 3rem;
+}
+progress.pogressbar2 {
+  position: relative;
+  left: 1.3rem;
+  top: 0.5rem;
+}
+progress.pogressbar3 {
+  position: relative;
+  left: 0.1rem;
+  top: 0.5rem;
+}
+progress.pogressbar4 {
+  position: relative;
+  left: 3rem;
+  top: 0.5rem;
+}
+progress.pogressbar5 {
+  position: relative;
+  left: 2.4rem;
+  top: 0.5rem;
+}
+progress.pogressbar6 {
+  position: relative;
+  left: 0.9rem;
+  top: 0.5rem;
+}
+
+.container2 {
+  display: flex;
+  grid-column-start: 1;
+  grid-column-end: 7;
+  justify-content: space-around;
+}
+div.Variant1 {
+  border: 2px dotted black;
+  border-radius: 1rem;
+  width: 10rem;
+  height: 15rem;
+}
+div.Variant2 {
+  border: 2px dotted black;
+  border-radius: 1rem;
+  width: 10rem;
+  height: 15rem;
+}
+div.Variant3 {
+  border: 2px dotted black;
+  border-radius: 1rem;
+  width: 10rem;
+  height: 15rem;
+}
+li.StatsName4 {
+  position: relative;
+  top: 5.1rem;
+  right: 3rem;
+  font-variant-caps: all-petite-caps;
+}
+
+img.PokvarientImg {
+  width: 10rem;
+  height: 10rem;
+}
+
+h3.PokVarientName {
+  position: relative;
+  left: 3rem;
+}
+p.PokVarientId {
+  position: relative;
+  bottom: 1rem;
+  left: 4rem;
+}
+
+h3.Arrow {
+  font-weight: 900;
+  align-self: center;
+  font-size: x-large;
+}
