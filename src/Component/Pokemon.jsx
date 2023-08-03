@@ -1,18 +1,26 @@
 import React, { useEffect, useState } from "react";
 import "../CSS/Pokemon.css";
 import "../CSS/PopUpModel.css";
+import "../CSS/Mobile.css";
+import Evalution from "./Evolution";
 const color = require("../Colors/color");
 const Pokemon = (props) => {
   const [imglink, setimglink] = useState({});
   const [backcolor, setbackcolor] = useState({});
   const [component, setcomponent] = useState();
-  
-  
+  const [showtext, setshowtext] = useState({ display: "none" });
+
   // popup component
   const close = () => {
     setcomponent("");
   };
-
+  const showmytext = () => {
+    if (showtext.display === "none") {
+      setshowtext({ display: "block" });
+    } else {
+      setshowtext({ display: "none" });
+    }
+  };
   const PopUpModel = (props) => {
     return (
       <>
@@ -23,7 +31,7 @@ const Pokemon = (props) => {
               src={props.Indivisual.sprites.other.dream_world.front_default}
               alt="Pokemonimg"
               className="PokImg1"
-              />
+            />
           </div>
           <div className="PokName">{props.Indivisual.name}</div>
           <div className="Line1">|</div>
@@ -33,10 +41,9 @@ const Pokemon = (props) => {
             X
           </button>
           <div className="PokInfo">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam
-            quibusdam voluptatem quam expedita quas quo rerum, ducimus magni
-            placeat quisquam dolor exercitationem perspiciatis quos tempore
-            necessitatibus ipsa modi, sit eos!
+            {props.Info.replace("", " ").substring(0, 350)} ....
+            <input type="button" value="Show text" onClick={showmytext}></input>
+            <div style={showtext}>{props.Info}</div>
           </div>
           <div className="hight">
             <li>
@@ -50,11 +57,7 @@ const Pokemon = (props) => {
             </li>
             <li className="downSkill">
               <span>{props.ability1}</span>{" "}
-              <span>
-                {props.ability2 === ""
-                  ? ""
-                  : props.ability2}
-              </span>
+              <span>{props.ability2 === "" ? "" : props.ability2}</span>
             </li>
           </div>
           <div className="Weight">
@@ -66,23 +69,18 @@ const Pokemon = (props) => {
               <label htmlFor="">Types</label>
             </li>
             <li className="downSkill">
-              <span
-                className="special "
-                style={{
-                  backgroundColor: `${color[props.type1]}`,
-                }}
-                >
-                {props.type1}
-              </span>{" "}
-              <span
-                className="special"
-                id="types2"
-                style={{
-                  backgroundColor: `${color[props.type2]}`,
-                }}
-                >
-                {props.Indivisual.types === undefined ? null : props.type2}
-              </span>
+              {props.TypeArr.map((type) => {
+                return (
+                  <span
+                    className="special "
+                    style={{
+                      backgroundColor: `${color[type]}`,
+                    }}
+                  >
+                    {type}
+                  </span>
+                );
+              })}
             </li>
           </div>
           <div className="Gender">
@@ -95,23 +93,15 @@ const Pokemon = (props) => {
             <li className="downSkill">
               <label htmlFor="">Weak Against</label>
             </li>
-            <li className="downSkill">
-              <span className="special">Fire</span>{" "}
-              <span className="special">Flying</span>
-            </li>
-            <li className="downSkill">
-              <span className="special">Fire</span>{" "}
-              <span className="special">Flying</span>
-            </li>
           </div>
 
           <div className="EggsGroups">
             <li>
               <label htmlFor="">Eggs Groups</label>
             </li>
-            <li>
-              <span>Male</span>,<span>Female</span>
-            </li>
+            {props.egg_group.map((grp) => {
+              return <li>{grp}</li>;
+            })}
           </div>
 
           <div className="statscol1">
@@ -122,7 +112,7 @@ const Pokemon = (props) => {
                 className="pogressbar1"
                 value={props.Indivisual.stats[0].base_stat}
                 max="100"
-                />
+              />
             </li>
             <li className="StatsName2">
               {props.Indivisual.stats[1].stat.name}
@@ -130,7 +120,7 @@ const Pokemon = (props) => {
                 className="pogressbar2"
                 value={props.Indivisual.stats[1].base_stat}
                 max="100"
-                />
+              />
             </li>
             <li className="StatsName3">
               Sp.{props.Indivisual.stats[3].stat.name.substring(8)}{" "}
@@ -138,7 +128,7 @@ const Pokemon = (props) => {
                 className="pogressbar3"
                 value={props.Indivisual.stats[3].base_stat}
                 max="100"
-                />
+              />
             </li>
           </div>
           <div className="statscol2">
@@ -148,7 +138,7 @@ const Pokemon = (props) => {
                 className="pogressbar4"
                 value={props.Indivisual.stats[5].base_stat}
                 max="100"
-                />
+              />
               <li className="StatsName5">
                 {props.Indivisual.stats[2].stat.name}
 
@@ -156,7 +146,7 @@ const Pokemon = (props) => {
                   className="pogressbar5"
                   value={props.Indivisual.stats[2].base_stat}
                   max="100"
-                  />
+                />
               </li>
               <li className="StatsName6">
                 Sp. {props.Indivisual.stats[4].stat.name.substring(8)}
@@ -164,72 +154,96 @@ const Pokemon = (props) => {
                   className="pogressbar6"
                   value={props.Indivisual.stats[4].base_stat}
                   max="100"
-                  />
+                />
               </li>
             </li>
           </div>
           <h1>Evalution</h1>
+
           <div className="container2">
-            <div className="Variant1  " style={backcolor}>
-              <img src="samplePok.png" alt="" className="PokvarientImg" />
-              <h3 className="PokVarientName">Name</h3>
-              <p className="PokVarientId">Id</p>
-            </div>
-            <h3 className="Arrow">--></h3>
-            <div className="Variant2" style={backcolor}>
-              <img src="samplePok.png" alt="" className="PokvarientImg" />
-              <h3 className="PokVarientName">Name</h3>
-              <p className="PokVarientId">Id</p>
-            </div>
-            <h3 className="Arrow">--></h3>
-            <div className="Variant3" style={backcolor}>
-              <img src="samplePok.png" className="PokvarientImg" />
-              <h3 className="PokVarientName">Name</h3>
-              <p className="PokVarientId">Id</p>
-            </div>
+            <Evalution EvalutionArray={props.EvolutionArray} />
           </div>
         </div>
       </>
     );
   };
-  
+
   const popupMycomponent = async () => {
-    const url = `https://pokeapi.co/api/v2/pokemon/${props.index}/`;
-    const responace = await fetch(url);
-    const Indivisual = await responace.json();
-    
-    let ability1="";
-    let ability2="";
-    if(Indivisual.abilities.length===2)
-    {
-      ability1=Indivisual.abilities[0].ability.name;
-      ability2=Indivisual.abilities[1].ability.name;
-    }else
-    {
-      ability1=Indivisual.abilities[0].ability.name;
-      ability2="";
+    try {
+      const url = `https://pokeapi.co/api/v2/pokemon/${props.index}`;
+      const responace = await fetch(url);
+      const Indivisual = await responace.json();
+
+      let ability1 = "";
+      let ability2 = "";
+      if (Indivisual.abilities.length === 2) {
+        ability1 = Indivisual.abilities[0].ability.name;
+        ability2 = Indivisual.abilities[1].ability.name;
+      } else {
+        ability1 = Indivisual.abilities[0].ability.name;
+        ability2 = "";
+      }
+      let arr = [];
+      Indivisual.types.forEach((element) => {
+        arr.push(element.type.name);
+        const backgroundColor = {
+          backgroundImage: `linear-gradient(${color[arr[0]]},${
+            color[arr[1] === undefined ? arr[0] : arr[1]]
+          })`,
+        };
+        setbackcolor(backgroundColor);
+      });
+      const url1 = `https://pokeapi.co/api/v2/pokemon-species/${props.index}/`;
+      const res = await fetch(url1);
+      const data = await res.json();
+      const url2 = data.evolution_chain.url;
+      const res2 = await fetch(url2);
+      const data2 = await res2.json();
+      let egg_group = [];
+      egg_group.push(data.egg_groups[0].name);
+      egg_group.push(
+        data.egg_groups[1] === undefined ? "" : data.egg_groups[1].name
+      );
+      let str = "";
+      data.flavor_text_entries.forEach((element) => {
+        if (element.language.name === "en") {
+          let s = element.flavor_text.replace("", " ");
+          if (str.includes(s)) {
+            str += "";
+          } else {
+            str += s;
+          }
+        }
+      });
+      let EvolutionArray = [];
+      EvolutionArray.push(data2.chain.species);
+      EvolutionArray.push(data2.chain.evolves_to[0].species);
+      let version3 =
+        data2.chain.evolves_to[0].evolves_to[0] == undefined
+          ? ""
+          : data2.chain.evolves_to[0].evolves_to[0].species;
+      if (version3 != "") {
+        EvolutionArray.push(version3);
+      }
+
+      let popupcomponent = (
+        <PopUpModel
+          Indivisual={Indivisual}
+          backcolor={backcolor}
+          type1={arr[0]}
+          type2={arr[1]}
+          TypeArr={arr}
+          ability1={ability1}
+          ability2={ability2}
+          egg_group={egg_group}
+          Info={str}
+          EvolutionArray={EvolutionArray}
+        />
+      );
+      setcomponent(popupcomponent);
+    } catch (err) {
+      alert("Internal server error !");
     }
-    let arr = [];
-    Indivisual.types.forEach((element) => {
-      arr.push(element.type.name);
-      const backgroundColor = {
-        backgroundImage: `linear-gradient(${color[arr[0]]},${
-          color[arr[1] === undefined ? arr[0] : arr[1]]
-        })`,
-      };
-      setbackcolor(backgroundColor);
-    });
-    let popupcomponent = (
-      <PopUpModel
-        Indivisual={Indivisual}
-        backcolor={backcolor}
-        type1={arr[0]}
-        type2={arr[1]}
-        ability1={ability1}
-        ability2={ability2}
-      />
-    );
-    setcomponent(popupcomponent);
   };
 
   const getImgColor = async () => {
@@ -251,7 +265,7 @@ const Pokemon = (props) => {
 
   useEffect(() => {
     getImgColor();
-  },);
+  });
 
   return (
     <>

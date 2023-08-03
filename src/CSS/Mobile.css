@@ -1,0 +1,90 @@
+@media only screen and (max-width: 600px) {
+  .Headling {
+    display: flex;
+    /* margin-left: 2rem; */
+    /* margin-top: 1rem; */
+  }
+  .childhead1 {
+    /* margin-left: 1rem; */
+    font-size: x-large;
+  }
+  childhead3 {
+    margin-left: 1.5rem;
+    /* margin-top: 2.6rem; */
+    font-size: larger;
+    font-weight: 700;
+    color: #00000080;
+  }
+  input.SearchBox {
+    margin-left: 0.7rem;
+    height: 2.5rem;
+    /* width: 33rem; */
+    border: 2px solid #b0d1d6;
+    border-radius: 4px;
+    background-color: #b0d1d6;
+  }
+  input.setFliter {
+    left: -1rem;
+    position: relative;
+    height: 3rem;
+    width: 7rem;
+    top: 0.5rem;
+    cursor: pointer;
+    border: 2px solid #b0d1d6;
+    border-radius: 4px;
+    background-color: #b0d1d6;
+  }
+  input.setFliterGender {
+    bottom: 34rem;
+    position: absolute;
+    right: 1rem;
+    height: 3rem;
+    width: 7rem;
+    top: 6rem;
+    cursor: pointer;
+    border: 2px solid #b0d1d6;
+    border-radius: 4px;
+    background-color: #b0d1d6;
+  }
+  .FiterGender {
+    writing-mode: lr;
+    top: 9.2rem;
+    left: 18rem;
+    position: absolute;
+    z-index: 1;
+  }
+  input.MyFilterGender {
+    cursor: pointer;
+    width: 6.5rem;
+    border: 2px solid rgb(103, 102, 102);
+    border-radius: 4px;
+    font: icon;
+    text-transform: capitalize;
+  }
+  button#Reset1,
+  button#Reset2 {
+    cursor: pointer;
+    width: 6.6rem;
+    border: 2px solid rgb(103, 102, 102);
+    border-radius: 4px;
+    font: icon;
+    text-transform: capitalize;
+  }
+  div.FiterTypes {
+    top: 9.3rem;
+    float: right;
+    position: absolute;
+    right: 8.9rem;
+    z-index: 1;
+    cursor: pointer;
+    font-weight: bolder;
+  }
+  input.MyFilter {
+    cursor: pointer;
+    width: 6.6rem;
+    border: 2px solid rgb(103, 102, 102);
+    border-radius: 4px;
+    font: icon;
+    text-transform: capitalize;
+  }
+}

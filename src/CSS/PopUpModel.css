@@ -35,7 +35,7 @@ div.PokInfo {
   grid-row-start: 2;
   width: 24rem;
   position: absolute;
-  bottom: 54rem;
+  bottom: 55rem;
   right: 0rem;
 }
 img.PokImg1 {
@@ -116,7 +116,6 @@ div.EggsGroups {
   left: 1rem;
 }
 
-
 span.special {
   font-family: emoji;
   font-style: normal;
@@ -128,6 +127,8 @@ span.special {
   font: icon;
   text-transform: capitalize;
   padding: 2px;
+  margin-left: 10px;
+  right: 10px;
 }
 li.downSkill {
   position: relative;
@@ -263,19 +264,15 @@ li.StatsName4 {
   font-variant-caps: all-petite-caps;
 }
 
-img.PokvarientImg {
-  width: 10rem;
-  height: 10rem;
-}
-
 h3.PokVarientName {
   position: relative;
-  left: 3rem;
+  left: 2rem;
+  top: 0.5rem;
 }
 p.PokVarientId {
   position: relative;
-  bottom: 1rem;
-  left: 4rem;
+  bottom: 0.5rem;
+  left: 4.5rem;
 }
 
 h3.Arrow {

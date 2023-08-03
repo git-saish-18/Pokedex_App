@@ -1,5 +1,5 @@
 body {
-  background-color: #cadcdf30;
+  background-color: #11505b30;
 }
 
 .Headling {
@@ -34,16 +34,18 @@ input.SearchBox {
   background-color: #b0d1d6;
 }
 
-  p.searchText {
-    margin-left: 3rem;
-    color: #000000bd;
-    font-size: larger;
+p.searchText {
+  margin-left: 3rem;
+  color: #000000bd;
+  font-size: larger;
 }
 button.searchButton {
   height: 2.9rem;
   position: absolute;
   border: 2px solid #b0d1d6;
   border-radius: 4px;
+  background-color: #b0d1d6
+
 }
 button.searchButton:hover {
   border-color: black;
@@ -52,7 +54,13 @@ button.searchButton:hover {
 div.main2 {
   display: flex;
 }
-
+/* li {
+  height: 1.7rem;
+  list-style: none;
+  text-decoration: none;
+  background: white;
+  width: 14rem;
+} */
 .Typefiter {
   position: relative;
   left: 18rem;
@@ -66,4 +74,101 @@ div.AllFiter {
 }
 select {
   width: 5rem;
+}
+
+div.FiterTypes {
+  float: right;
+}
+div.FiterTypes {
+  top: 15.3rem;
+  float: right;
+  position: absolute;
+  right: 34.9rem;
+  z-index: 1;
+  cursor: pointer;
+  font-weight: bolder;
+}
+
+input.MyFilterGender {
+  cursor: pointer;
+  width: 14rem;
+  border: 2px solid rgb(103, 102, 102);
+  border-radius: 4px;
+  font: icon;
+  text-transform: capitalize;
+}
+
+div.main2 {
+  display: flex;
+  height: 6rem;
+}
+
+input.MyFilter {
+  cursor: pointer;
+  width: 14rem;
+  border: 2px solid rgb(103, 102, 102);
+  border-radius: 4px;
+  font: icon;
+  text-transform: capitalize;
+}
+button#Reset1,
+button#Reset2 {
+  cursor: pointer;
+  width: 14rem;
+  border: 2px solid rgb(103, 102, 102);
+  border-radius: 4px;
+  font: icon;
+  text-transform: capitalize;
+}
+
+button#Reset1:hover,
+button#Reset2:hover {
+  background-color: grey;
+  color: white;
+}
+
+input.MyFilter:hover,
+input.MyFilterGender:hover {
+  background-color: #b0d1d6;
+  color: black;
+}
+input.MyFilter:active,
+input.MyFilterGender:active {
+  background-color: rgb(132, 0, 255);
+  color: black;
+}
+
+input.setFliter {
+  left: 10rem;
+  position: relative;
+  height: 3rem;
+  width: 14rem;
+  top: 4rem;
+  cursor: pointer;
+  border: 2px solid #b0d1d6;
+  border-radius: 4px;
+  background-color: #b0d1d6;
+}
+
+input.setFliterGender {
+  bottom: 34rem;
+  position: absolute;
+  right: 20rem;
+  height: 3rem;
+  width: 14rem;
+  top: 11.5rem;
+  cursor: pointer;
+  border: 2px solid #b0d1d6;
+  border-radius: 4px;
+  background-color: #b0d1d6;
+}
+
+.FiterGender {
+  top: 15rem;
+  right: 20rem;
+  position: absolute;
+  z-index: 1;
+}
+img.SearchImg {
+  width: 2rem;
 }
