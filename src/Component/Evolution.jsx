@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import "../CSS/Pokemon.css";
 import "../CSS/Mobile.css";
 const color = require("../Colors/color");
@@ -23,9 +23,11 @@ const MyComp = (props) => {
       setbackcolor(backgroundColor);
     });
   };
-  useEffect(() => {
+
+  useMemo(() => {
     pull();
-  },[]);
+  }, [imgurl]);
+
   return (
     <>
       <div className="Variant1  " style={backcolor}>

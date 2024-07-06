@@ -14,6 +14,7 @@ const Pokemon = (props) => {
   const close = () => {
     setcomponent("");
   };
+
   const showmytext = () => {
     if (showtext.display === "none") {
       setshowtext({ display: "block" });
@@ -21,6 +22,7 @@ const Pokemon = (props) => {
       setshowtext({ display: "none" });
     }
   };
+
   const PopUpModel = (props) => {
     return (
       <>
@@ -265,7 +267,7 @@ const Pokemon = (props) => {
 
   useEffect(() => {
     getImgColor();
-  });
+  }, [props.offSetCount, props.Gender,props.Categery]);
 
   return (
     <>

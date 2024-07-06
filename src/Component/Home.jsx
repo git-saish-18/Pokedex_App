@@ -1,25 +1,34 @@
-import react, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "../CSS/Home.css";
 import "../CSS/Mobile.css";
 import Pokemon from "./Pokemon";
+import { API, FilterTypes, GenderType } from "../constant/constant";
 const Home = () => {
   const [Id, setId] = useState("");
+  const [offSetCount, setOffSetCount] = useState(0);
+  const [offSetCountForGender, setoffSetCountForGender] = useState(0);
+  const [offSetCountForCategory, setoffSetCountForCategory] = useState(0);
   const [Entity, setEntity] = useState("Loding.....");
+  const [filterEntity, setFilterEntity] = useState("Loding.....");
+  const [GenderEntity, setGenderEntity] = useState("Loding.....");
+  const [categeryArr] = useState(FilterTypes);
+  const [GenderArr] = useState(GenderType);
+  const [Categery, setCategery] = useState();
+  const [Gender, setGender] = useState();
+  const [show, setshow] = useState({ display: "none" });
+  const [showGender, setshowGender] = useState({ display: "none" });
 
-  let sigledata;
   const getDetailsSingle = async () => {
     try {
-      const url = `https://pokeapi.co/api/v2/pokemon/${Id}/`;
-      const responace = await fetch(url);
+      const responace = await fetch(API.GET_SINGLE(Id));
       const resStatus = responace.status;
       if (resStatus !== 200) {
         alert("Enter the Correct Id or Name !");
         setId("");
       } else {
         const data = await responace.json();
-
         let imgurl = data.sprites.other.dream_world.front_default;
-        sigledata = (
+        const sigledata = (
           <Pokemon key={data.id} index={data.id} data={data} imgurl={imgurl} />
         );
         setEntity(sigledata);
@@ -29,70 +38,75 @@ const Home = () => {
     }
   };
 
-  let Alldata;
   const getAllDetails = async () => {
     try {
       setId("");
-      const url = "https://pokeapi.co/api/v2/pokemon";
-      const responace = await fetch(url);
+      const responace = await fetch(API.GET_ALL(offSetCount));
       let data = await responace.json();
-      Alldata = data.results.map((data, index) => {
-        return <Pokemon key={index} index={index + 1} data={data} />;
+      const Alldata = data.results.map((data, index) => {
+        let id = data.url.substring(34).replace("/", "");
+
+        return (
+          <Pokemon key={id} index={id} data={data} offSetCount={offSetCount} />
+        );
       });
       setEntity(Alldata);
     } catch (err) {
       alert("Fetching data....");
     }
   };
-  useEffect(() => {
-    getAllDetails();
-  }, []);
 
-
-  const FilterTypes = [
-    "normal",
-    "fighting",
-    "flying",
-    "poison",
-    "ground",
-    "rock",
-  ];
-
-  const gender = ["female", "male", "genderless"];
-  const [categery, setcategery] = useState(FilterTypes);
-  const [Gender, setGender] = useState(gender);
-
-  let alldata;
-  const fiterdata = async (e) => {
+  const fiterdataByCategory = async () => {
     try {
-      let categery = e.target.value;
-      const url = `https://pokeapi.co/api/v2/type/${categery}/`;
-      const responace = await fetch(url);
+      const responace = await fetch(API.GET_CATEGORY(Categery));
       const data = await responace.json();
-      const status = responace.status;
-      if (status !== 200) {
-        alert("Wait fetching data....");
-      }
-      alldata = data.pokemon.map((res, index) => {
+
+      const alldata = data.pokemon.map((res, index) => {
         let id = res.pokemon.url.substring(34).replace("/", "");
-        return <Pokemon key={index} index={id} data={res.pokemon} />;
+        return (
+          <Pokemon
+            key={index}
+            index={id}
+            data={res.pokemon}
+            Categery={Categery}
+          />
+        );
       });
-      setEntity(alldata);
-    } catch (err) {
-      alert("Wait fetching data....");
-    }
+
+      const result = alldata.splice(offSetCountForCategory, 20);
+
+      setFilterEntity(result);
+    } catch (err) {}
   };
+
+  const fiterdataOnGender = async () => {
+    try {
+      const responace = await fetch(API.GET_GENDER(Gender));
+      const data = await responace.json();
+
+      const alldata = data.pokemon_species_details.map((res, index) => {
+        let id = res.pokemon_species.url.substring(42).replace("/", "");
+        return (
+          <Pokemon
+            key={index}
+            index={id}
+            data={res.pokemon_species}
+            Gender={Gender}
+          />
+        );
+      });
+
+      const result = alldata.splice(offSetCountForGender, 20);
+
+      setGenderEntity(result);
+    } catch (err) {}
+  };
+
   const ResetAll = () => {
     getAllDetails();
-    setEntity(Alldata);
+    setGender(null);
+    setCategery(null);
   };
-  const ResetAllGender = () => {
-    getAllDetails();
-    setEntity(Alldata);
-  };
-  
-  const [show, setshow] = useState({ display: "none" });
-  const [showGender, setshowGender] = useState({ display: "none" });
 
   const displayTypes = () => {
     if (show.display === "none") {
@@ -108,25 +122,19 @@ const Home = () => {
       setshowGender({ display: "none" });
     }
   };
-  const fiterdataOnGender = async (e) => {
-    try {
-      let gender = e.target.value;
-      const url = `https://pokeapi.co/api/v2/gender/${gender}/`;
-      const responace = await fetch(url);
-      const data = await responace.json();
-      const status = responace.status;
-      if (status !== 200) {
-        alert("Wait fetching data....");
-      }
-      alldata = data.pokemon_species_details.map((res, index) => {
-        let id = res.pokemon_species.url.substring(42).replace("/", "");
-        return <Pokemon key={index} index={id} data={res.pokemon_species} />;
-      });
-      setEntity(alldata);
-    } catch (err) {
-      alert("Wait fetching data....");
-    }
-  };
+
+  useEffect(() => {
+    getAllDetails();
+  }, [offSetCount]);
+
+  useEffect(() => {
+    fiterdataOnGender();
+  }, [Gender, offSetCountForGender]);
+
+  useEffect(() => {
+    fiterdataByCategory();
+  }, [Categery, offSetCountForCategory]);
+
   return (
     <>
       <div className="Headling">
@@ -172,7 +180,7 @@ const Home = () => {
           onClick={displayTypes}
         />
         <div className="FiterTypes" style={show}>
-          {categery.map((Type) => {
+          {categeryArr.map((Type) => {
             return (
               <li>
                 <label htmlFor={Type}>
@@ -182,7 +190,10 @@ const Home = () => {
                     name={Type}
                     id={Type}
                     value={Type}
-                    onClick={fiterdata}
+                    onClick={(e) => {
+                      setGender(null);
+                      setCategery(e.target.value);
+                    }}
                   />
                 </label>
               </li>
@@ -203,7 +214,7 @@ const Home = () => {
           onClick={displayGender}
         />
         <div className="FiterGender" style={showGender}>
-          {Gender.map((gender) => {
+          {GenderArr.map((gender) => {
             return (
               <li>
                 <label htmlFor={gender}>
@@ -213,7 +224,10 @@ const Home = () => {
                     name={gender}
                     id={gender}
                     value={gender}
-                    onClick={fiterdataOnGender}
+                    onClick={(e) => {
+                      setCategery(null);
+                      setGender(e.target.value);
+                    }}
                   />
                 </label>
               </li>
@@ -223,7 +237,7 @@ const Home = () => {
             <label htmlFor="Reset2">
               <button
                 className="MyFilter"
-                onClick={ResetAllGender}
+                onClick={ResetAll}
                 name="Reset"
                 id="Reset2"
               >
@@ -233,7 +247,88 @@ const Home = () => {
           </li>
         </div>
       </div>
-      <div className="HomeMain">{Entity}</div>
+      {!Categery && !Gender && (
+        <>
+          {" "}
+          <div className="HomeMain">{Entity}</div>
+          <div className="paginationBtn">
+            <button
+              type="button"
+              onClick={() => {
+                offSetCount === 0
+                  ? setOffSetCount(0)
+                  : setOffSetCount(offSetCount - 20);
+              }}
+              className="pagination-btn"
+            >
+              Prev
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setOffSetCount(offSetCount + 20);
+              }}
+              className="pagination-btn"
+            >
+              Next
+            </button>
+          </div>
+        </>
+      )}
+      {Categery && (
+        <>
+          <div className="HomeMain">{filterEntity}</div>
+          <div className="paginationBtn">
+            <button
+              type="button"
+              onClick={() => {
+                offSetCountForCategory === 0
+                  ? setoffSetCountForCategory(0)
+                  : setoffSetCountForCategory(offSetCountForCategory - 20);
+              }}
+              className="pagination-btn"
+            >
+              Prev
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setoffSetCountForCategory(offSetCountForCategory + 20);
+              }}
+              className="pagination-btn"
+            >
+              Next
+            </button>
+          </div>
+        </>
+      )}
+      {Gender && (
+        <>
+          <div className="HomeMain">{GenderEntity}</div>
+          <div className="paginationBtn">
+            <button
+              type="button"
+              onClick={() => {
+                offSetCountForGender === 0
+                  ? setoffSetCountForGender(0)
+                  : setoffSetCountForGender(offSetCountForGender - 20);
+              }}
+              className="pagination-btn"
+            >
+              Prev
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setoffSetCountForGender(offSetCountForGender + 20);
+              }}
+              className="pagination-btn"
+            >
+              Next
+            </button>
+          </div>
+        </>
+      )}
     </>
   );
 };
