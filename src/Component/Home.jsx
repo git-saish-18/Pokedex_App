@@ -3,6 +3,7 @@ import "../CSS/Home.css";
 import "../CSS/Mobile.css";
 import Pokemon from "./Pokemon";
 import { API, FilterTypes, GenderType } from "../constant/constant";
+import Pagination from "./Pagination";
 const Home = () => {
   const [Id, setId] = useState("");
   const [offSetCount, setOffSetCount] = useState(0);
@@ -251,82 +252,25 @@ const Home = () => {
         <>
           {" "}
           <div className="HomeMain">{Entity}</div>
-          <div className="paginationBtn">
-            <button
-              type="button"
-              onClick={() => {
-                offSetCount === 0
-                  ? setOffSetCount(0)
-                  : setOffSetCount(offSetCount - 20);
-              }}
-              className="pagination-btn"
-            >
-              Prev
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                setOffSetCount(offSetCount + 20);
-              }}
-              className="pagination-btn"
-            >
-              Next
-            </button>
-          </div>
+          <Pagination Count={offSetCount} setCount={setOffSetCount} />
         </>
       )}
       {Categery && (
         <>
           <div className="HomeMain">{filterEntity}</div>
-          <div className="paginationBtn">
-            <button
-              type="button"
-              onClick={() => {
-                offSetCountForCategory === 0
-                  ? setoffSetCountForCategory(0)
-                  : setoffSetCountForCategory(offSetCountForCategory - 20);
-              }}
-              className="pagination-btn"
-            >
-              Prev
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                setoffSetCountForCategory(offSetCountForCategory + 20);
-              }}
-              className="pagination-btn"
-            >
-              Next
-            </button>
-          </div>
+          <Pagination
+            Count={offSetCountForCategory}
+            setCount={setoffSetCountForCategory}
+          />
         </>
       )}
       {Gender && (
         <>
           <div className="HomeMain">{GenderEntity}</div>
-          <div className="paginationBtn">
-            <button
-              type="button"
-              onClick={() => {
-                offSetCountForGender === 0
-                  ? setoffSetCountForGender(0)
-                  : setoffSetCountForGender(offSetCountForGender - 20);
-              }}
-              className="pagination-btn"
-            >
-              Prev
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                setoffSetCountForGender(offSetCountForGender + 20);
-              }}
-              className="pagination-btn"
-            >
-              Next
-            </button>
-          </div>
+          <Pagination
+            Count={offSetCountForGender}
+            setCount={setoffSetCountForGender}
+          />
         </>
       )}
     </>

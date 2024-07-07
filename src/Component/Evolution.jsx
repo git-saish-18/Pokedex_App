@@ -44,7 +44,12 @@ const Evolution = (props) => {
     <>
       {props.EvalutionArray.map((ele, index) => {
         let id = ele.url.substring(42).replace("/", "");
-        return <MyComp id={id} key={index} />;
+        return (
+          <>
+            <MyComp id={id} key={index} />
+            {index + 1 === props.EvalutionArray.length ? "" : "  -->"}
+          </>
+        );
       })}
     </>
   );

@@ -1,0 +1,28 @@
+.container {
+  text-align: center;
+}
+
+.reset-button {
+  background-color: #66acf8;
+  color: white;
+  border: none;
+  font-size: 30px;
+  cursor: pointer;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  width: 14rem;
+  text-align: center;
+}
+
+.reset-button span {
+  text-align: center;
+}
+
+.reset-button span:hover {
+  rotate: 180deg;
+}
+
+.reset-button:hover {
+  background-color: #3c95f5;
+}
