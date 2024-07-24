@@ -4,6 +4,7 @@ import "./App.css";
 function App() {
   return (
     <>
+    //home page
     <Home/>
     </>
   );
