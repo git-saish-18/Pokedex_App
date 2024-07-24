@@ -4,7 +4,7 @@ const color = {
   flying: " #B2D2EB",
   poison: "#CFB7ED",
   ground: "#F4D1A6",
-  rock: "#C5AEA8",
+  rock: "#C5AEA3",
   bug: "#C1E0C8",
   ghost: "#D7C2D7",
   steel: "#C2D4CE",
