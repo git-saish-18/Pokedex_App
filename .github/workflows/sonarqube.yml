@@ -1,48 +1,25 @@
-name: SonarQube Analysis
+name: Build
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main # main branch name
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 jobs:
-  sonar:
+  sonarQubeScan1:
+    name: sonarQubeScan1
     runs-on: ubuntu-latest
-
+    
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '16'
-
-    - name: Cache SonarQube packages
-      uses: actions/cache@v2
-      with:
-        path: ~/.sonar/cache
-        key: ${{ runner.os }}-sonar-${{ hashFiles('**/*.js', '**/*.ts', '**/*.jsx', '**/*.tsx') }}
-        restore-keys: ${{ runner.os }}-sonar
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Build the project
-      run: npm run build
-
-    - name: Install SonarQube Scanner
-      run: |
-        curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
-        unzip sonar-scanner.zip
-        mv sonar-scanner-4.6.2.2472-linux sonar-scanner
-        export PATH=$PATH:$PWD/sonar-scanner/bin
-
-    - name: SonarQube Scan
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-      run: |
-        sonar-scanner \
-          -Dsonar.projectKey=YourProjectKey \
-          -Dsonar.sources=src \
-          -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
-          -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
-          -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: SonarQube Scan 1
+        uses: sonarsource/sonarqube-scan-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_1 }}  # analysis token associated to your project
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        with:
+          projectBaseDir: src/
